@@ -3,8 +3,8 @@
     - Reads sensor values from BME280 and sends it to TTN
     - ...
     
-    author: Marco Roda, marcoroda.com
-    date:   Mar 2020
+    author: Nicholas Singleton, SpartanLabs
+    date:   June 2022
 */
 
 #include <Arduino.h>
@@ -12,7 +12,7 @@
 #include <hal/hal.h>
 #include <SPI.h>
 #include <SSD1306.h>
-#include "_device_config.h" /* Replace by device_config.h and add TTN keys to it */
+#include "device_config.h" /* Replace by device_config.h and add TTN keys to it */
 
 #include "Bme280.h"
 
@@ -289,15 +289,15 @@ void setup(void)
         Setting up channels should happen after LMIC_setSession, as that
         configures the minimal channel set.
     */
-    LMIC_setupChannel(0, 868100000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-    LMIC_setupChannel(1, 868300000, DR_RANGE_MAP(DR_SF12, DR_SF7B), BAND_CENTI);      // g-band
-    LMIC_setupChannel(2, 868500000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-    LMIC_setupChannel(3, 867100000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-    LMIC_setupChannel(4, 867300000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-    LMIC_setupChannel(5, 867500000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-    LMIC_setupChannel(6, 867700000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-    LMIC_setupChannel(7, 867900000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
-    LMIC_setupChannel(8, 868800000, DR_RANGE_MAP(DR_FSK,  DR_FSK),  BAND_MILLI);      // g2-band
+    // LMIC_setupChannel(0, 868100000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
+    // LMIC_setupChannel(1, 868300000, DR_RANGE_MAP(DR_SF12, DR_SF7B), BAND_CENTI);      // g-band
+    // LMIC_setupChannel(2, 868500000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
+    // LMIC_setupChannel(3, 867100000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
+    // LMIC_setupChannel(4, 867300000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
+    // LMIC_setupChannel(5, 867500000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
+    // LMIC_setupChannel(6, 867700000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
+    // LMIC_setupChannel(7, 867900000, DR_RANGE_MAP(DR_SF12, DR_SF7),  BAND_CENTI);      // g-band
+    // LMIC_setupChannel(8, 868800000, DR_RANGE_MAP(DR_FSK,  DR_FSK),  BAND_MILLI);      // g2-band
     
     /*  TTN defines an additional channel at 869.525Mhz using SF9 for class B
         devices' ping slots. LMIC does not have an easy way to define set this
@@ -305,13 +305,13 @@ void setup(void)
         frequency is not configured here.
     */
     // Disable link check validation
-    LMIC_setLinkCheckMode(0);
+    // LMIC_setLinkCheckMode(0);
 
     // TTN uses SF9 for its RX2 window.
-    LMIC.dn2Dr = DR_SF9;
+    // LMIC.dn2Dr = DR_SF9;
 
     // Set data rate and transmit power for uplink (note: txpow seems to be ignored by the library)
-    LMIC_setDrTxpow(DR_SF11,14);
+    // LMIC_setDrTxpow(DR_SF11,14);
     // LMIC_setDrTxpow(DR_SF7,14);
 
     /* Start job */
